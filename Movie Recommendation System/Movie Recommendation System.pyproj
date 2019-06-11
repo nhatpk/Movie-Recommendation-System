@@ -39,7 +39,6 @@
     <Compile Include="Movie_Recommendation_System\objects.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Movie_Recommendation_System\static\data\main.py" />
     <Compile Include="runserver.py" />
     <Compile Include="Movie_Recommendation_System\__init__.py" />
     <Compile Include="Movie_Recommendation_System\views.py" />

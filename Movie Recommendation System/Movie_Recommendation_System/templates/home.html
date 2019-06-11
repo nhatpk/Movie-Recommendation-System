@@ -62,6 +62,34 @@
                         </form>
                     </div>
                 </div>
+                
+                <div class="movie">
+                    <div class="row type">
+                        <div class="title">
+                            <center><h3>RECOMMEND MOVIE TO USER:</h3></center>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <form action="{{url_for('recommendationByUser')}}" class="form" method="POST">
+                            <div class="col-1-2">
+                                <div class="wrap-col">
+                                    <div class="post">
+                                        <label>User Id:</label>
+                                        <input type="text" id="id" name="id">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1-2">
+                                <div class="wrap-col">
+                                    <div class="post">
+                                        <button class="glyphicon glyphicon-search" aria-hidden="true">Recommend</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

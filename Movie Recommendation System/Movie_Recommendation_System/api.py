@@ -23,6 +23,17 @@ modelSVD = pickle.load(open('Movie_Recommendation_System/static/data/SVDModel.pk
 
 
 
+# Convert list of obj to string 
+def convert(jsonStr):
+    list = json.loads(jsonStr)
+    result = ""
+    for s in list:
+        result += s['name'] + ", "
+
+    return result[:-2]
+
+
+
 
 # Predict user rating of movie
 #==================================================================
@@ -40,19 +51,18 @@ def apiRecommendationByMovie(movieId):
     similarMovieList_Keyword_genre, movie_genres_keyword_score = getSimilarMovieKeywords(movieId)
     similarMovieList_Keyword_genre = similarMovieList_Keyword_genre[similarMovieList_Keyword_genre.score.notnull()]
     similarMovieList_Keyword_genre = similarMovieList_Keyword_genre.sort_values(by='score').tail(10)
-    print(similarMovieList_Keyword_genre.columns)
     
     items = similarMovieList_Keyword_genre.values.tolist()
-    print(items[0])
     result = []
     for item in items:
         temp = movieObj()
-
-        temp.genres = item[0]
+        
+        temp.genres = convert(item[0])
+        temp.genreObjs = item[0]
         temp.id = item[1]
         temp.imdbId = item[7]
         temp.overview = item[2]
-        #temp.score = item[3]
+        temp.strGenres = convert(temp.genres)
         temp.tags = item[3]
         temp.title = item[4]
         temp.vote_count = item[5]
@@ -218,17 +228,16 @@ def apiRecommendationByUser(userId):
 
     already_rated, predictions = recommend_movies(preds_df, userId, movies_df, ratings_df, 10)
     items = predictions.values.tolist()
-    print(items[0])
 
     result = []
     for item in items:
         temp = movieObj()
-
-        temp.genres = item[0]
+        
+        temp.genres = convert(item[0])
+        temp.genreObjs = item[0]
         temp.id = item[1]
         temp.imdbId = item[7]
         temp.overview = item[2]
-        #temp.score = item[3]
         temp.tags = item[3]
         temp.title = item[4]
         temp.vote_count = item[5]
@@ -289,7 +298,8 @@ def apiTrending():
     for item in items:
         temp = movieObj()
 
-        temp.genres = item[0]
+        temp.genres = convert(item[0])
+        temp.genreObjs = item[0]
         temp.id = item[1]
         temp.overview = item[2]
         temp.score = item[3]

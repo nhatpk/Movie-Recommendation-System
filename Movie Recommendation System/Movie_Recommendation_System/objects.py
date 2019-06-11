@@ -10,7 +10,8 @@ class objGenre(object):
 
 
 class movieObj(object):
-    genres = [objGenre]
+    genres = ""
+    genreObjs = [objGenre]
     id = 0
     imdbId = 0
     imageUrl = ""
