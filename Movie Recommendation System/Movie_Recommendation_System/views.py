@@ -57,16 +57,27 @@ def predictionRating():
 
 # Recommend movies by movie
 #==================================================================
-@app.route('/recommendationByMovie')
-def recommendationByMovie():
+@app.route('/api/recommendationByMovie', methods=['GET'])
+def recommendationByMovieAPI():
     movieId = int(request.args.get('id', 0))
-    listRecommedation = apirecommendationByMovie(movieId)
+    listRecommendation = apiRecommendationByMovie(movieId)
+    list = [obj.toJSON() for obj in listRecommendation]
+
+    jsonStr = json.dumps(list)
+    result = Response(jsonStr, status=200, mimetype='application/json')
+    return result
+
+
+@app.route('/recommendationByMovie', methods=['GET', 'POST'])
+def recommendationByMovie():
+    movieId = int(request.form.get('id', 0)) | int(request.args.get('id', 0))
+    listRecommendation = apiRecommendationByMovie(movieId)
 
     return render_template(
         'recommendationByMovie.html',
         title = 'recommendationByMovie',
         year = datetime.now().year,
-        list = listRecommedation,
+        list = listRecommendation,
         movieId = movieId
     )
 
@@ -78,17 +89,17 @@ def recommendationByMovie():
 @app.route('/api/recommendationByUser/', methods=['GET'])
 def recommendationByUserAPI():
     userId = int(request.args.get('id', 0))
-    listRecommedation = apiRecommendationByUser(userId)
-    list = [obj.toJSON() for obj in listRecommedation]
+    listRecommendation = apiRecommendationByUser(userId)
+    list = [obj.toJSON() for obj in listRecommendation]
 
     jsonStr = json.dumps(list)
     result = Response(jsonStr, status=200, mimetype='application/json')
     return result
 
 
-@app.route('/recommendationByUser')
+@app.route('/recommendationByUser', methods=['GET', 'POST'])
 def recommendationByUser():
-    userId = int(request.args.get('id', 0))
+    userId = int(request.form.get('id', 0)) | int(request.args.get('id', 0))
     listRecommedation = apiRecommendationByUser(userId)
 
     return render_template(

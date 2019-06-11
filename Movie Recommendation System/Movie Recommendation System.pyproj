@@ -58,6 +58,8 @@
     <Content Include="Movie_Recommendation_System\static\content\responsive.css" />
     <Content Include="Movie_Recommendation_System\static\content\style.css" />
     <Content Include="Movie_Recommendation_System\static\content\zerogrid.css" />
+    <Content Include="Movie_Recommendation_System\static\data\keywords.csv" />
+    <Content Include="Movie_Recommendation_System\static\data\links_small.csv" />
     <Content Include="Movie_Recommendation_System\static\images\0.jpg" />
     <Content Include="Movie_Recommendation_System\static\images\1.jpg" />
     <Content Include="Movie_Recommendation_System\static\images\10.jpg" />

@@ -24,6 +24,7 @@ class jsonRecommendationObj(object):
     id = 0
     overview = ""
     score = 0.0
+    tags = ""
     title = ""
     vote_average = 0.0
     vote_count = 0
