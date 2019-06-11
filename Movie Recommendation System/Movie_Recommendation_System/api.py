@@ -16,13 +16,10 @@ from surprise import Reader, Dataset, SVD, evaluate
 
 
 
+cols = ["genres", "id", "overview", "tagline", "title", "vote_count", "vote_average", 'imdb_id']
+
 #modelAdaBoostClassifier = pickle.load(open('Movie_Recommendation_System/static/data/model_AdaBoostClassifier.pkl', 'rb'))
 modelSVD = pickle.load(open('Movie_Recommendation_System/static/data/SVDModel.pkl', 'rb'))
-
-
-
-
-df = loadTmdb5000()
 
 
 
@@ -37,42 +34,29 @@ def apiPredictionRating(userId, movieId):
 
 
 
-# Recommend movies for user
+# Recommend similar movies
 #==================================================================
 def apiRecommendationByMovie(movieId):
     similarMovieList_Keyword_genre, movie_genres_keyword_score = getSimilarMovieKeywords(movieId)
     similarMovieList_Keyword_genre = similarMovieList_Keyword_genre[similarMovieList_Keyword_genre.score.notnull()]
     similarMovieList_Keyword_genre = similarMovieList_Keyword_genre.sort_values(by='score').tail(10)
-    items = similarMovieList_Keyword_genre.values.tolist()
-    print(items)
+    print(similarMovieList_Keyword_genre.columns)
     
+    items = similarMovieList_Keyword_genre.values.tolist()
+    print(items[0])
     result = []
     for item in items:
-        temp = jsonRecommendationObj()
+        temp = movieObj()
 
-        #[  
-        #    311,
-        #    "[{'id': 18, 'name': 'Drama'}, {'id': 80, 'name': 'Crime'}]",
-        #    'Once Upon a Time in America',
-        #    'A former Prohibition-era Jewish gangster returns to the Lower East Side of Manhattan over thirty years later, where he once again must confront the ghosts and regrets of his old life.',
-        #    8.3,
-        #    1104.0,
-        #    [  
-        #        'life and death',
-        #        'corruption',
-        #        'street gang'
-        #    ],
-        #    0.598984255967496
-        #]
-
-        temp.genres = item[1]
-        temp.id = item[0]
-        temp.overview = item[3]
-        temp.score = item[7]
-        temp.tags = item[6]
-        temp.title = item[2]
+        temp.genres = item[0]
+        temp.id = item[1]
+        temp.imdbId = item[7]
+        temp.overview = item[2]
+        #temp.score = item[3]
+        temp.tags = item[3]
+        temp.title = item[4]
         temp.vote_count = item[5]
-        temp.vote_average = item[4]
+        temp.vote_average = item[6]
 
         result.append(temp)
 
@@ -87,7 +71,6 @@ def getSimilarMovieKeywords(movie_id):
 
     # Data Impulation: movie_metadata
     df_movie_meta = loadMoviesMetadata()
-    cols = ["id","genres", "title", "overview", "vote_average", "vote_count"]
     df_movie_meta = df_movie_meta[cols].head(2000)    
     df_movie_meta['id'] = df_movie_meta['id'].str.replace('-','')
     df_movie_meta.dropna(subset=["id"], axis = 0 , inplace= True)
@@ -106,8 +89,13 @@ def getSimilarMovieKeywords(movie_id):
     movie_genres_keyword_score["id"] = movie_genres_keyword_score["id"].astype(str).astype(int)
   
     movie_item = np.array(movie_genres_keyword_score.loc[movie_genres_keyword_score.id == movie_id])
-    if len(movie_item) > 0: 
+    if len(movie_item) > 0:
         movie_item = np.delete(movie_item, 0)
+    else:
+        movie_item = np.array(movie_genres_keyword_score.loc[movie_genres_keyword_score.id == 0])
+        movie_item = np.delete(movie_item, 0)
+
+
     pearsonObj = [pearson(np.array(movie_genres_keyword_score.iloc[i, 1:]), movie_item) 
                   for i in range(movie_genres_keyword_score.shape[0])]
     similarity_value = np.array(pearsonObj)
@@ -211,7 +199,7 @@ def apiRecommendationByUser(userId):
     movies_list = loadMoviesMetadata()
 
     ratings_df = pd.DataFrame(ratings, columns = ['userId', 'movieId', 'rating', 'timestamp'], dtype = int)
-    movies_df = pd.DataFrame(movies_list, columns = ['id', 'title', 'genres'])
+    movies_df = pd.DataFrame(movies_list, columns = cols)
     movies_df['id'] = movies_df['id']
     movies_df['id'] = movies_df['id'].str.replace('-','')
     movies_df.dropna(subset=["id"], axis = 0 , inplace= True)
@@ -230,18 +218,21 @@ def apiRecommendationByUser(userId):
 
     already_rated, predictions = recommend_movies(preds_df, userId, movies_df, ratings_df, 10)
     items = predictions.values.tolist()
+    print(items[0])
 
     result = []
     for item in items:
-        temp = jsonRecommendationObj()
+        temp = movieObj()
 
-        #temp.genres = item.get('genres')
-        temp.id = item[0]
-        #temp.overview = item.get('overview')
-        #temp.score = item.get('score')
-        temp.title = item[1]
-        #temp.vote_count = item.get('vote_count')
-        #temp.vote_average = item.get('vote_average')
+        temp.genres = item[0]
+        temp.id = item[1]
+        temp.imdbId = item[7]
+        temp.overview = item[2]
+        #temp.score = item[3]
+        temp.tags = item[3]
+        temp.title = item[4]
+        temp.vote_count = item[5]
+        temp.vote_average = item[6]
 
         result.append(temp)
 
@@ -274,15 +265,16 @@ def recommend_movies(predictions_df, userID, movies_df, original_ratings_df, num
 # Retrieve top trending movies
 #==================================================================
 def apiTrending():
+    df = loadTmdb5000()
     C = df['vote_average'].mean()
     m = df['vote_count'].quantile(0.9)
     q_movies = df.copy().loc[df['vote_count'] >= m]
     q_movies.shape
-    
+
     # Calculate based on the IMDB formula
     def weighted_rating(x, m=m, C=C):
         v = x['vote_count']
-        R = x['vote_average']
+        R = x['vote_average']    
         return (v/(v+m) * R) + (m/(m+v) * C)
     
     # Define a new feature 'score' and calculate its value with `weighted_rating()`
@@ -290,18 +282,21 @@ def apiTrending():
 	# Sort movies based on score calculated above
     q_movies = q_movies.sort_values('score', ascending = False)
 	# Retrieve the top 10 movies
-    topten = q_movies[['id','title', 'vote_count', 'vote_average', 'score']].head(10)
-    items = topten.values.tolist()
+    topten = q_movies[["genres", "id", "overview", "score", "tagline", "title", "vote_count", "vote_average"]].head(10)
 
+    items = topten.values.tolist()
     result = []
     for item in items:
-        temp = jsonTrendingObj()
+        temp = movieObj()
 
-        temp.id = item[0]
-        temp.title = item[1]
-        temp.vote_count = item[2]
-        temp.vote_average = item[3]
-        temp.score = item[4]
+        temp.genres = item[0]
+        temp.id = item[1]
+        temp.overview = item[2]
+        temp.score = item[3]
+        temp.tags = item[4]
+        temp.title = item[5]
+        temp.vote_count = item[6]
+        temp.vote_average = item[7]
 
         result.append(temp)
 

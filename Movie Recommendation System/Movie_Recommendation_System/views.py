@@ -45,7 +45,7 @@ def predictionRating():
 
     return render_template(
         'predictionRating.html',
-        title = 'PedictionRating',
+        title = 'Pediction Rating',
         year = datetime.now().year,
         rating = rating,
         userId = userId,
@@ -75,7 +75,7 @@ def recommendationByMovie():
 
     return render_template(
         'recommendationByMovie.html',
-        title = 'recommendationByMovie',
+        title = 'Recommendations',
         year = datetime.now().year,
         list = listRecommendation,
         movieId = movieId
@@ -104,7 +104,7 @@ def recommendationByUser():
 
     return render_template(
         'recommendationByUser.html',
-        title = 'recommendationByUser',
+        title = 'Recommendations',
         year = datetime.now().year,
         list = listRecommedation,
         userId = userId
@@ -131,7 +131,7 @@ def trending():
 
     return render_template(
         'trending.html',
-        title = 'Trending',
+        title = 'Top Ten',
         year = datetime.now().year,
         list = listTrending
     )

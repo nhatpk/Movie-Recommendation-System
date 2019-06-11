@@ -36,11 +36,14 @@
                         {% for movie in list[0:5] %}
                         <div class="col-1-5">
                             <div class="wrap-col">
-                                <div class="post">
+                                <div class="post" style="text-align:left;">
                                     <a href="{{url_for('recommendationByMovie', id=movie.id)}}"><h3>{{movie.title}}</h3></a>
-                                    <span>Vote count: {{movie.vote_count}}</span>
-                                    <span>Vote average: {{movie.vote_average}}</span>
-                                    <span>Vote score: {{movie.score}}</span>
+                                    <span><font color="green">Description:</font> {{movie.overview}}</span><br />
+                                    <span><font color="green">Tags:</font> {{movie.tag}}</span><br />
+                                    <span><font color="green">Genres:</font> {{movie.genres}}</span><br />
+                                    <span><font color="green">Vote score:</font> {{movie.score}}</span><br />
+                                    <span><font color="green">Vote count:</font> {{movie.vote_count}}</span><br />
+                                    <span><font color="green">Vote average:</font> {{movie.vote_average}}</span><br />
                                 </div>
                             </div>
                         </div>
@@ -51,11 +54,14 @@
                         {% for movie in list[5:10] %}
                         <div class="col-1-5">
                             <div class="wrap-col">
-                                <div class="post">
+                                <div class="post" style="text-align:left;">
                                     <a href="{{url_for('recommendationByMovie', id=movie.id)}}"><h3>{{movie.title}}</h3></a>
-                                    <span>Vote count: {{movie.vote_count}}</span>
-                                    <span>Vote average: {{movie.vote_average}}</span>
-                                    <span>Vote score: {{movie.score}}</span>
+                                    <span><font color="green">Description:</font> {{movie.overview}}</span><br />
+                                    <span><font color="green">Tags:</font> {{movie.tag}}</span><br />
+                                    <span><font color="green">Genres:</font> {{movie.genres}}</span><br />
+                                    <span><font color="green">Vote score:</font> {{movie.score}}</span><br />
+                                    <span><font color="green">Vote count:</font> {{movie.vote_count}}</span><br />
+                                    <span><font color="green">Vote average:</font> {{movie.vote_average}}</span><br />
                                 </div>
                             </div>
                         </div>
