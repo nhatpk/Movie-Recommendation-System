@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29001.49
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Movie Recommendation System", "Movie Recommendation System\Movie Recommendation System.pyproj", "{87B0D82B-6035-412D-BEB8-D86D82BF0B7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87B0D82B-6035-412D-BEB8-D86D82BF0B7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87B0D82B-6035-412D-BEB8-D86D82BF0B7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87B0D82B-6035-412D-BEB8-D86D82BF0B7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87B0D82B-6035-412D-BEB8-D86D82BF0B7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {422FC647-643E-47D2-99B3-AFFCA5D615A8}
+	EndGlobalSection
+EndGlobal

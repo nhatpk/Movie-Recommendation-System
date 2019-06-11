@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>87b0d82b-6035-412d-beb8-d86d82bf0b7b</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{789894c7-04a9-4a11-a6b5-3f4435165112};{1b580a1a-fdb3-4b32-83e1-6407eb2722e6};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>runserver.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Web launcher</LaunchProvider>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <OutputPath>.</OutputPath>
+    <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
+    <Name>Movie Recommendation System</Name>
+    <RootNamespace>Movie Recommendation System</RootNamespace>
+    <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
+    <InterpreterId>MSBuild|env_mrs|$(MSBuildProjectFullPath)</InterpreterId>
+    <SuppressPackageInstallationPrompt>True</SuppressPackageInstallationPrompt>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Movie_Recommendation_System\api.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Movie_Recommendation_System\dbfunction.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Movie_Recommendation_System\objects.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Movie_Recommendation_System\static\data\main.py" />
+    <Compile Include="runserver.py" />
+    <Compile Include="Movie_Recommendation_System\__init__.py" />
+    <Compile Include="Movie_Recommendation_System\views.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Movie_Recommendation_System\" />
+    <Folder Include="Movie_Recommendation_System\static\" />
+    <Folder Include="Movie_Recommendation_System\static\content\" />
+    <Folder Include="Movie_Recommendation_System\static\fonts\" />
+    <Folder Include="Movie_Recommendation_System\static\images\" />
+    <Folder Include="Movie_Recommendation_System\static\scripts\" />
+    <Folder Include="Movie_Recommendation_System\static\data\" />
+    <Folder Include="Movie_Recommendation_System\templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Movie_Recommendation_System\static\content\responsive.css" />
+    <Content Include="Movie_Recommendation_System\static\content\style.css" />
+    <Content Include="Movie_Recommendation_System\static\content\zerogrid.css" />
+    <Content Include="Movie_Recommendation_System\static\images\0.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\1.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\10.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\11.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\12.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\13.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\14.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\15.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\16.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\17.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\18.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\19.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\2.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\20.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\3.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\4.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\5.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\6.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\7.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\8.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\9.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\bg.jpg" />
+    <Content Include="Movie_Recommendation_System\static\images\boy7.PNG" />
+    <Content Include="Movie_Recommendation_System\static\images\button-search.png" />
+    <Content Include="Movie_Recommendation_System\static\images\downArrow.png" />
+    <Content Include="Movie_Recommendation_System\static\images\facebook.png" />
+    <Content Include="Movie_Recommendation_System\static\images\google.png" />
+    <Content Include="Movie_Recommendation_System\static\images\hot.png" />
+    <Content Include="Movie_Recommendation_System\static\images\instagram.png" />
+    <Content Include="Movie_Recommendation_System\static\images\Location.png" />
+    <Content Include="Movie_Recommendation_System\static\images\logo.png" />
+    <Content Include="Movie_Recommendation_System\static\images\Mail.png" />
+    <Content Include="Movie_Recommendation_System\static\images\Monthly.png" />
+    <Content Include="Movie_Recommendation_System\static\images\Phone.png" />
+    <Content Include="Movie_Recommendation_System\static\images\pinterest.png" />
+    <Content Include="Movie_Recommendation_System\static\images\play_button_64.png" />
+    <Content Include="Movie_Recommendation_System\static\images\search-dark.png" />
+    <Content Include="Movie_Recommendation_System\static\images\star.png" />
+    <Content Include="Movie_Recommendation_System\static\images\twitter.png" />
+    <Content Include="Movie_Recommendation_System\static\images\upArrow.png" />
+    <Content Include="Movie_Recommendation_System\static\scripts\css3-mediaqueries.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\html5.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\jquery-1.9.1.min.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\jquery.min.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\modernizr.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\navigation.js" />
+    <Content Include="Movie_Recommendation_System\static\data\movies_metadata.csv" />
+    <Content Include="Movie_Recommendation_System\static\data\ratings_small.csv" />
+    <Content Include="Movie_Recommendation_System\static\data\SVDModel.pkl" />
+    <Content Include="Movie_Recommendation_System\static\data\tmdb_5000_credits.csv" />
+    <Content Include="Movie_Recommendation_System\static\data\tmdb_5000_movies.csv" />
+    <Content Include="Movie_Recommendation_System\templates\home.html" />
+    <Content Include="Movie_Recommendation_System\templates\recommendationByMovie.html" />
+    <Content Include="requirements.txt" />
+    <Content Include="Movie_Recommendation_System\static\content\bootstrap.css" />
+    <Content Include="Movie_Recommendation_System\static\content\bootstrap.min.css" />
+    <Content Include="Movie_Recommendation_System\static\content\site.css" />
+    <Content Include="Movie_Recommendation_System\static\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Movie_Recommendation_System\static\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Movie_Recommendation_System\static\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Movie_Recommendation_System\static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Movie_Recommendation_System\static\scripts\bootstrap.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\bootstrap.min.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\jquery-1.10.2.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\jquery-1.10.2.min.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\jquery-1.10.2.min.map" />
+    <Content Include="Movie_Recommendation_System\static\scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\jquery.validate.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\jquery.validate.min.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\modernizr-2.6.2.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\respond.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\respond.min.js" />
+    <Content Include="Movie_Recommendation_System\static\scripts\_references.js" />
+    <Content Include="Movie_Recommendation_System\templates\recommendationByUser.html" />
+    <Content Include="Movie_Recommendation_System\templates\predictionRating.html" />
+    <Content Include="Movie_Recommendation_System\templates\trending.html" />
+    <Content Include="Movie_Recommendation_System\templates\layout.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env_mrs\">
+      <Id>env_mrs</Id>
+      <Version>3.7</Version>
+      <Description>env_mrs (Python 3.7 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

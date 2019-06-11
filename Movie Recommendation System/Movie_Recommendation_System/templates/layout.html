@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+ <!--<![endif]-->
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>{{title}} - MRS - Grp 8</title>
+
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="/static/content/zerogrid.css">
+    <link rel="stylesheet" href="/static/content/style.css">
+    <link rel="stylesheet" href="/static/content/responsive.css">
+
+    <!--[if lt IE 8]>
+       <div style=' clear: both; text-align:center; position: relative;'>
+         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+           <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+        </a>
+      </div>
+    <![endif]-->
+    <!--[if lt IE 9]>
+        <script src="/static/scripts/html5.js"></script>
+        <script src="/static/scripts/css3-mediaqueries.js"></script>
+    <![endif]-->
+</head>
+
+
+<body>
+    <div class="wrap-body">
+        <!--////////////////////////////////////Container-->
+        {% block content %}
+        {% endblock %}
+
+
+        <!--////////////////////////////////////Footer-->
+        <footer>
+            <div class="bottom-footer">
+                <div class="wrap-bottom ">
+                    <div class="copyright">
+                        <p>{{year}} - Movies Recommedation System - Group 8</p>
+                        <!--- Designed by <a href="https://www.zerotheme.com">ZEROTHEME</a>-->
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/static/scripts/css3-mediaqueries.js"></script>
+    <script src="/static/scripts/jquery.min.js"></script>
+</body>
+</html>

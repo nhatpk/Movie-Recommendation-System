@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+
+<!--////////////////////////////////////Header-->
+<header>
+    <div class="wrap-header zerogrid">
+        <div class="row">
+            <div id="menu">
+                <nav>
+                    <div class="wrap-nav">
+                        <ul>
+                            <li><a href="{{url_for('home')}}">Home</a></li>
+                            <li><a href="{{url_for('trending')}}">Trending</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="container">
+    <div class="wrap-container zerogrid">
+        <div id="main-content" class="">
+            <div class="">
+                <div class="movie">
+                    <div class="row type">
+                        <div class="title">
+                            <center><h2>RECOMMENDATION MOVIES FOR USER {{userId}}</h2></center>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        {% for movie in list[0:5] %}
+                        <div class="col-1-5">
+                            <div class="wrap-col">
+                                <div class="post">
+                                    <a href="{{url_for('predictionRating', userId=userId, movieId=movie.id)}}"><h3>{{movie.title}}</h3></a>
+                                    <!--<span>Vote count: {{movie.vote_count}}</span>
+                                    <span>Vote average: {{movie.vote_average}}</span>
+                                    <span>Vote score: {{movie.score}}</span>-->
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="row">
+                        {% for movie in list[5:10] %}
+                        <div class="col-1-5">
+                            <div class="wrap-col">
+                                <div class="post">
+                                    <a href="{{url_for('predictionRating', userId=userId, movieId=movie.id)}}"><h3>{{movie.title}}</h3></a>
+                                    <span>Vote count: {{movie.vote_count}}</span>
+                                    <span>Vote average: {{movie.vote_average}}</span>
+                                    <span>Vote score: {{movie.score}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+
+<!--////////////////////////////////////Header-->
+<header>
+    <div class="wrap-header zerogrid">
+        <div class="row">
+            <div id="menu">
+                <nav>
+                    <div class="wrap-nav">
+                        <ul>
+                            <li><a href="{{url_for('home')}}">Home</a></li>
+                            <li><a href="{{url_for('trending')}}">Trending</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="container">
+    <div class="wrap-container zerogrid">
+        <div id="main-content" class="">
+            <div class="">
+                <div class="movie">
+                    <div class="row type">
+                        <div class="title">
+                            <center><h3>PREDICT RATING SCORE:</h3></center>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div>
+                            <center><h4>Predicted RATING SCORE for movie {{movieId}} by user {{userId}} is</h4></center>
+                        </div>
+                        <br />
+                        <div>
+                            <center><h4>{{rating}}</h4></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
