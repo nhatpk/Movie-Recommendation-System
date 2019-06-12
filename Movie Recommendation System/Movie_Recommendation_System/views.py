@@ -30,7 +30,7 @@ def home():
 def predictionRatingAPI():
     userId = int(request.args.get('userId', 0))
     movieId = int(request.args.get('movieId', 0))
-    rating = apiPredictionRating(userId, userId)
+    rating, movieTitle = apiPredictionRating(userId, movieId)
 
     jsonStr = json.dumps(rating)
     result = Response(jsonStr, status=200, mimetype='application/json')
@@ -41,7 +41,7 @@ def predictionRatingAPI():
 def predictionRating():
     userId = int(request.form.get('userId', 0)) | int(request.args.get('userId', 0))
     movieId = int(request.form.get('movieId', 0)) | int(request.args.get('movieId', 0))
-    rating = apiPredictionRating(userId, userId)
+    rating, movieTitle = apiPredictionRating(userId, movieId)
 
     return render_template(
         'predictionRating.html',
@@ -49,7 +49,7 @@ def predictionRating():
         year = datetime.now().year,
         rating = rating,
         userId = userId,
-        movieId = movieId
+        movieTitle = movieTitle
     )
 
 

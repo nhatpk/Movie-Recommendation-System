@@ -29,9 +29,13 @@ modelSVD = pickle.load(open('Movie_Recommendation_System/static/data/SVDModel.pk
 # Predict user rating of movie
 #==================================================================
 def apiPredictionRating(userId, movieId):
-	pre = modelSVD.predict(userId, movieId)
-	
-	return str(pre.est)
+    pre = modelSVD.predict(userId, movieId)
+
+    df_movie_meta = diMoviesMetadata()
+    df_movie_meta.set_index('id')
+    movieTitle = (str((df_movie_meta[df_movie_meta['id'] == movieId])['title'].values))[2:-2]
+    
+    return str(pre.est), movieTitle
 
 
 
@@ -55,15 +59,11 @@ def apiRecommendationByMovie(movieId):
 def getSimilarMovieKeywords(movie_id):    
     # Data Impulation: keywords
     df_keyword = loadKeywords()
-    df_keyword = df_keyword.head(2000)
+    #df_keyword = df_keyword.head(2000)
 
     # Data Impulation: movie_metadata
-    df_movie_meta = loadMoviesMetadata()
-    df_movie_meta = df_movie_meta[cols].head(2000)    
-    df_movie_meta['id'] = df_movie_meta['id'].str.replace('-','')
-    df_movie_meta.dropna(subset=["id"], axis = 0 , inplace= True)
-    df_movie_meta["id"] = df_movie_meta["id"].astype(str).astype(int)
-    df_movie_meta= df_movie_meta.merge(df_keyword,on='id')
+    df_movie_meta = diMoviesMetadata()
+    df_movie_meta = df_movie_meta.merge(df_keyword,on='id')
     df_movie_meta.set_index('id')
 
     #movieTitle = (df_movie_meta[df_movie_meta['id'] == movie_id]).iloc[0]['title']
@@ -94,6 +94,17 @@ def getSimilarMovieKeywords(movie_id):
 
     df_movie_meta["score"] = similarity_value
     return df_movie_meta, movie_genres_keyword_score, movieTitle
+
+
+# Data Impulation: movie_metadata
+def diMoviesMetadata():
+    df_movie_meta = loadMoviesMetadata()
+    df_movie_meta = df_movie_meta[cols]#.head(2000)    
+    df_movie_meta['id'] = df_movie_meta['id'].str.replace('-','')
+    df_movie_meta.dropna(subset=["id"], axis = 0 , inplace= True)
+    df_movie_meta["id"] = df_movie_meta["id"].astype(str).astype(int)
+
+    return df_movie_meta
 
 
 # Return the list of top 3 elements or all; whichever is more.
