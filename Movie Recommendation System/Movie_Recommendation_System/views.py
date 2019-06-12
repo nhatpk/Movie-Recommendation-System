@@ -60,7 +60,7 @@ def predictionRating():
 @app.route('/api/recommendationByMovie', methods=['GET'])
 def recommendationByMovieAPI():
     movieId = int(request.args.get('id', 0))
-    listRecommendation = apiRecommendationByMovie(movieId)
+    listRecommendation, movieTitle = apiRecommendationByMovie(movieId)
     list = [obj.toJSON() for obj in listRecommendation]
 
     jsonStr = json.dumps(list)
@@ -71,14 +71,14 @@ def recommendationByMovieAPI():
 @app.route('/recommendationByMovie', methods=['GET', 'POST'])
 def recommendationByMovie():
     movieId = int(request.form.get('id', 0)) | int(request.args.get('id', 0))
-    listRecommendation = apiRecommendationByMovie(movieId)
+    listRecommendation, movieTitle = apiRecommendationByMovie(movieId)
 
     return render_template(
         'recommendationByMovie.html',
         title = 'Recommendations',
         year = datetime.now().year,
         list = listRecommendation,
-        movieId = movieId
+        movieTitle = movieTitle
     )
 
 

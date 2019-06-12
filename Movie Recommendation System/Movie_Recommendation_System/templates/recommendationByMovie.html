@@ -28,7 +28,7 @@
                 <div class="movie">
                     <div class="row type">
                         <div class="title">
-                            <center><h2>SIMILAR MOVIES OF {{movieId}}</h2></center>
+                            <center><h2>SIMILAR MOVIES FOR "{{movieTitle}}"</h2></center>
                         </div>
                     </div>
 
@@ -37,25 +37,24 @@
                         <div class="col-1-5">
                             <div class="wrap-col">
                                 <div class="post" style="text-align:left;">
-                                    <div class="post" style="text-align:left;">
-                                        <div class="view effect">
-                                            <img class="thumb" src="{{movie.imageUrl}}" />
-                                            <div class="mask">
-                                                <a href="{{url_for('recommendationByMovie', id=movie.id)}}" class="info" title="Full Image">
-                                                    <img src="images/play_button_64.png" />
-                                                </a>
-                                            </div>
+                                    <div class="view effect">
+                                        <img class="thumb" src="{{movie.imageUrl}}" />
+                                        <div class="mask">
+                                            <a href="{{url_for('recommendationByMovie', id=movie.id)}}" class="info" title="Full Image">
+                                                <img src="images/play_button_64.png" />
+                                            </a>
                                         </div>
-                                        <div class="clear"></div>
-                                        <a href="{{url_for('recommendationByMovie', id=movie.id)}}"><h3>{{movie.title}}</h3></a>
-                                        <span><font color="green">Description:</font> {{movie.overview}}</span><br />
-                                        <span><font color="green">Tags:</font> {{movie.tag}}</span><br />
-                                        <span><font color="green">Genres:</font> {{movie.genres}}</span><br />
-                                        <span><font color="green">Vote score:</font> {{movie.score}}</span><br />
-                                        <span><font color="green">Vote count:</font> {{movie.vote_count}}</span><br />
-                                        <span><font color="green">Vote average:</font> {{movie.vote_average}}</span><br />
                                     </div>
+                                    <div class="clear"></div>
+                                    <a href="{{url_for('recommendationByMovie', id=movie.id)}}"><h3>{{movie.title}}</h3></a>
+                                    <span><font color="green">Description:</font> {{movie.overview}}</span><br />
+                                    <span><font color="green">Tags:</font> {{movie.tag}}</span><br />
+                                    <span><font color="green">Genres:</font> {{movie.genres}}</span><br />
+                                    <span><font color="green">Vote score:</font> {{movie.score}}</span><br />
+                                    <span><font color="green">Vote count:</font> {{movie.vote_count}}</span><br />
+                                    <span><font color="green">Vote average:</font> {{movie.vote_average}}</span><br />
                                 </div>
+                            </div>
                         </div>
                         {% endfor %}
                     </div>
@@ -65,29 +64,27 @@
                         <div class="col-1-5">
                             <div class="wrap-col">
                                 <div class="post" style="text-align:left;">
-                                    <div class="post" style="text-align:left;">
-                                        <div class="view effect">
-                                            <img class="thumb" src="{{movie.imageUrl}}" />
-                                            <div class="mask">
-                                                <a href="{{url_for('recommendationByMovie', id=movie.id)}}" class="info" title="Full Image">
-                                                    <img src="images/play_button_64.png" />
-                                                </a>
-                                            </div>
+                                    <div class="view effect">
+                                        <img class="thumb" src="{{movie.imageUrl}}" />
+                                        <div class="mask">
+                                            <a href="{{url_for('recommendationByMovie', id=movie.id)}}" class="info" title="Full Image">
+                                                <img src="images/play_button_64.png" />
+                                            </a>
                                         </div>
-                                        <div class="clear"></div>
-                                        <a href="{{url_for('recommendationByMovie', id=movie.id)}}"><h3>{{movie.title}}</h3></a>
-                                        <span><font color="green">Description:</font> {{movie.overview}}</span><br />
-                                        <span><font color="green">Tags:</font> {{movie.tag}}</span><br />
-                                        <span><font color="green">Genres:</font> {{movie.genres}}</span><br />
-                                        <span><font color="green">Vote score:</font> {{movie.score}}</span><br />
-                                        <span><font color="green">Vote count:</font> {{movie.vote_count}}</span><br />
-                                        <span><font color="green">Vote average:</font> {{movie.vote_average}}</span><br />
                                     </div>
+                                    <div class="clear"></div>
+                                    <a href="{{url_for('recommendationByMovie', id=movie.id)}}"><h3>{{movie.title}}</h3></a>
+                                    <span><font color="green">Description:</font> {{movie.overview}}</span><br />
+                                    <span><font color="green">Tags:</font> {{movie.tag}}</span><br />
+                                    <span><font color="green">Genres:</font> {{movie.genres}}</span><br />
+                                    <span><font color="green">Vote score:</font> {{movie.score}}</span><br />
+                                    <span><font color="green">Vote count:</font> {{movie.vote_count}}</span><br />
+                                    <span><font color="green">Vote average:</font> {{movie.vote_average}}</span><br />
                                 </div>
+                            </div>
                         </div>
                         {% endfor %}
                     </div>
-                </div>
                 </div>
             </div>
         </div>

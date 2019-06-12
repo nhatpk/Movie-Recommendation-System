@@ -25,7 +25,7 @@ modelSVD = pickle.load(open('Movie_Recommendation_System/static/data/SVDModel.pk
 
 # Convert list of obj to string 
 def convert(jsonStr):
-    list = json.loads(jsonStr)
+    list = json.loads(jsonStr.replace("\'", "\""))
     result = ""
     for s in list:
         result += s['name'] + ", "
@@ -48,7 +48,7 @@ def apiPredictionRating(userId, movieId):
 # Recommend similar movies
 #==================================================================
 def apiRecommendationByMovie(movieId):
-    similarMovieList_Keyword_genre, movie_genres_keyword_score = getSimilarMovieKeywords(movieId)
+    similarMovieList_Keyword_genre, movie_genres_keyword_score, movieTitle = getSimilarMovieKeywords(movieId)
     similarMovieList_Keyword_genre = similarMovieList_Keyword_genre[similarMovieList_Keyword_genre.score.notnull()]
     similarMovieList_Keyword_genre = similarMovieList_Keyword_genre.sort_values(by='score').tail(10)
     
@@ -62,7 +62,6 @@ def apiRecommendationByMovie(movieId):
         temp.id = item[1]
         temp.imdbId = item[7]
         temp.overview = item[2]
-        temp.strGenres = convert(temp.genres)
         temp.tags = item[3]
         temp.title = item[4]
         temp.vote_count = item[5]
@@ -70,7 +69,7 @@ def apiRecommendationByMovie(movieId):
 
         result.append(temp)
 
-    return result
+    return result, movieTitle
 
 
 # Find similar movies by keywords
@@ -88,6 +87,8 @@ def getSimilarMovieKeywords(movie_id):
     df_movie_meta= df_movie_meta.merge(df_keyword,on='id')
     df_movie_meta.set_index('id')
 
+    movieTitle = (df_movie_meta[df_movie_meta['id'] == movie_id]).iloc[0]['title']
+
     # Parse the stringified features into their corresponding python objects
     df_movie_meta['keywords'] = df_movie_meta['keywords'].apply(ast.literal_eval)
     df_movie_meta['keywords'] = df_movie_meta['keywords'].apply(get_list)
@@ -102,7 +103,7 @@ def getSimilarMovieKeywords(movie_id):
     if len(movie_item) > 0:
         movie_item = np.delete(movie_item, 0)
     else:
-        movie_item = np.array(movie_genres_keyword_score.loc[movie_genres_keyword_score.id == 0])
+        movie_item = np.array(movie_genres_keyword_score.loc[movie_genres_keyword_score.id == 1])
         movie_item = np.delete(movie_item, 0)
 
 
@@ -112,7 +113,7 @@ def getSimilarMovieKeywords(movie_id):
    
 
     df_movie_meta["score"] = similarity_value
-    return df_movie_meta, movie_genres_keyword_score
+    return df_movie_meta, movie_genres_keyword_score, movieTitle
 
 
 # Return the list of top 3 elements or all; whichever is more.
