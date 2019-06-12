@@ -105,6 +105,6 @@ def getPoster(movieTitle):
     jsonObj = requestResult.json()
     url = jsonObj.get('Poster')
 
-    print(jsonObj)
+    #print(jsonObj)
 
     return url

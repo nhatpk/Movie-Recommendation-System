@@ -59,7 +59,7 @@ def apiRecommendationByMovie(movieId):
 def getSimilarMovieKeywords(movie_id):    
     # Data Impulation: keywords
     df_keyword = loadKeywords()
-    #df_keyword = df_keyword.head(2000)
+    df_keyword = df_keyword#.head(2000)
 
     # Data Impulation: movie_metadata
     df_movie_meta = diMoviesMetadata()
@@ -83,7 +83,9 @@ def getSimilarMovieKeywords(movie_id):
     if len(movie_item) > 0:
         movie_item = np.delete(movie_item, 0)
     else:
-        movie_item = np.array(movie_genres_keyword_score.loc[movie_genres_keyword_score.id == 1])
+        # Set a fake id to get results
+        # This case only happen when we run on sampling dataset (there is not enough data)
+        movie_item = np.array(movie_genres_keyword_score.loc[movie_genres_keyword_score.id == 278])
         movie_item = np.delete(movie_item, 0)
 
 
