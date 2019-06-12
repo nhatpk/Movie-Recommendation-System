@@ -17,20 +17,11 @@ from surprise import Reader, Dataset, SVD, evaluate
 
 
 cols = ["genres", "id", "overview", "tagline", "title", "vote_count", "vote_average", 'imdb_id']
+# colsTrending = ["genres", "id", "overview", "score", "tagline", "title", "vote_count", "vote_average"]
 
 #modelAdaBoostClassifier = pickle.load(open('Movie_Recommendation_System/static/data/model_AdaBoostClassifier.pkl', 'rb'))
 modelSVD = pickle.load(open('Movie_Recommendation_System/static/data/SVDModel.pkl', 'rb'))
 
-
-
-# Convert list of obj to string 
-def convert(jsonStr):
-    list = json.loads(jsonStr.replace("\'", "\""))
-    result = ""
-    for s in list:
-        result += s['name'] + ", "
-
-    return result[:-2]
 
 
 
@@ -50,24 +41,12 @@ def apiPredictionRating(userId, movieId):
 def apiRecommendationByMovie(movieId):
     similarMovieList_Keyword_genre, movie_genres_keyword_score, movieTitle = getSimilarMovieKeywords(movieId)
     similarMovieList_Keyword_genre = similarMovieList_Keyword_genre[similarMovieList_Keyword_genre.score.notnull()]
-    similarMovieList_Keyword_genre = similarMovieList_Keyword_genre.sort_values(by='score').tail(10)
+    similarMovieList_Keyword_genre = similarMovieList_Keyword_genre.sort_values(by='score', ascending=False).head(10)
     
-    items = similarMovieList_Keyword_genre.values.tolist()
-    result = []
-    for item in items:
-        temp = movieObj()
-        
-        temp.genres = convert(item[0])
-        temp.genreObjs = item[0]
-        temp.id = item[1]
-        temp.imdbId = item[7]
-        temp.overview = item[2]
-        temp.tags = item[3]
-        temp.title = item[4]
-        temp.vote_count = item[5]
-        temp.vote_average = item[6]
-
-        result.append(temp)
+    list = similarMovieList_Keyword_genre.values.tolist()
+    
+    # Convert to movieObj
+    result = mappingMovieObj(list)
 
     return result, movieTitle
 
@@ -87,7 +66,8 @@ def getSimilarMovieKeywords(movie_id):
     df_movie_meta= df_movie_meta.merge(df_keyword,on='id')
     df_movie_meta.set_index('id')
 
-    movieTitle = (df_movie_meta[df_movie_meta['id'] == movie_id]).iloc[0]['title']
+    #movieTitle = (df_movie_meta[df_movie_meta['id'] == movie_id]).iloc[0]['title']
+    movieTitle = (str((df_movie_meta[df_movie_meta['id'] == movie_id])['title'].values))[2:-2]
 
     # Parse the stringified features into their corresponding python objects
     df_movie_meta['keywords'] = df_movie_meta['keywords'].apply(ast.literal_eval)
@@ -228,23 +208,9 @@ def apiRecommendationByUser(userId):
     preds_df = pd.DataFrame(all_user_predicted_ratings, columns = R_df.columns)
 
     already_rated, predictions = recommend_movies(preds_df, userId, movies_df, ratings_df, 10)
-    items = predictions.values.tolist()
-
-    result = []
-    for item in items:
-        temp = movieObj()
-        
-        temp.genres = convert(item[0])
-        temp.genreObjs = item[0]
-        temp.id = item[1]
-        temp.imdbId = item[7]
-        temp.overview = item[2]
-        temp.tags = item[3]
-        temp.title = item[4]
-        temp.vote_count = item[5]
-        temp.vote_average = item[6]
-
-        result.append(temp)
+    
+    # Convert to movieObj
+    result = mappingMovieObj(predictions.values.tolist())
 
     return result
 
@@ -293,22 +259,7 @@ def apiTrending():
     q_movies = q_movies.sort_values('score', ascending = False)
 	# Retrieve the top 10 movies
     topten = q_movies[["genres", "id", "overview", "score", "tagline", "title", "vote_count", "vote_average"]].head(10)
-
-    items = topten.values.tolist()
-    result = []
-    for item in items:
-        temp = movieObj()
-
-        temp.genres = convert(item[0])
-        temp.genreObjs = item[0]
-        temp.id = item[1]
-        temp.overview = item[2]
-        temp.score = item[3]
-        temp.tags = item[4]
-        temp.title = item[5]
-        temp.vote_count = item[6]
-        temp.vote_average = item[7]
-
-        result.append(temp)
+    # Convert to movieObj
+    result = mappingMovieObjForTrending(topten.values.tolist())
 
     return result
