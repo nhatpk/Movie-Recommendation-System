@@ -11,9 +11,9 @@ Using Python + Flask
 
 4. js/css and data files are stored in "Movie-Recommendation-System/Movie Recommendation System/Movie_Recommendation_System/static/"
 
-5. py files are in "Movie-Recommendation-System/Movie Recommendation System/Movie_Recommendation_System/"
-   a. api.py: all main functions are here
-   b. dbfunction.py: manage db-related progress like read/write 
-   c. objects.py: manage object problems like obj self-calling functions, mapping...
-   d. views.py: mainly routing progress
-   e. runserver.py: set host & port for your application. For Docker: if __name__ == '__main__': app.run(host='0.0.0.0', port='5000')
+5. py files are in "Movie-Recommendation-System/Movie Recommendation System/Movie_Recommendation_System/" <br/>
+   a. api.py: all main functions are here <br/>
+   b. dbfunction.py: manage db-related progress like read/write <br/>
+   c. objects.py: manage object problems like obj self-calling functions, mapping... <br/>
+   d. views.py: mainly routing progress <br/>
+   e. runserver.py: set host & port for your application. For Docker: if __name__ == '__main__': app.run(host='0.0.0.0', port='5000') <br/>
