@@ -62,7 +62,7 @@
                         </form>
                     </div>
                 </div>
-                
+
                 <div class="movie">
                     <div class="row type">
                         <div class="title">
@@ -84,6 +84,34 @@
                                 <div class="wrap-col">
                                     <div class="post">
                                         <button class="glyphicon glyphicon-search" aria-hidden="true">Recommend</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="movie">
+                    <div class="row type">
+                        <div class="title">
+                            <center><h3>SIMILAR MOVIES BY MOVIE:</h3></center>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <form action="{{url_for('recommendationByMovie')}}" class="form" method="POST">
+                            <div class="col-1-2">
+                                <div class="wrap-col">
+                                    <div class="post">
+                                        <label>Movie (Id or Title):</label>
+                                        <input type="text" id="id" name="id">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1-2">
+                                <div class="wrap-col">
+                                    <div class="post">
+                                        <button class="glyphicon glyphicon-search" aria-hidden="true">Search</button>
                                     </div>
                                 </div>
                             </div>

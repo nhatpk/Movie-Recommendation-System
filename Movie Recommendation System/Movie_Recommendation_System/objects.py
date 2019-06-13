@@ -94,8 +94,8 @@ def getPoster(movieTitle):
     #imdbId = imdbId.rjust(8, '0') # Right justified of length width with 0
     #imdbId = "tt" + imdbId
     
-    print('--------------------------------')
-    print(movieTitle)
+    #print('--------------------------------')
+    #print(movieTitle)
 
     url = "http://www.omdbapi.com/?apikey=6e417307&" + "t=" + str(movieTitle)
 

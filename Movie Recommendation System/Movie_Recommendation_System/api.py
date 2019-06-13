@@ -42,10 +42,13 @@ def apiPredictionRating(userId, movieId):
 
 # Recommend similar movies
 #==================================================================
-def apiRecommendationByMovie(movieId):
-    similarMovieList_Keyword_genre, movie_genres_keyword_score, movieTitle = getSimilarMovieKeywords(movieId)
+def apiRecommendationByMovie(movieIndex, type):
+    similarMovieList_Keyword_genre, movie_genres_keyword_score, movieTitle = getSimilarMovieKeywords(movieIndex, type)
+    if movie_genres_keyword_score.empty: 
+        return [], movieTitle
+
     similarMovieList_Keyword_genre = similarMovieList_Keyword_genre[similarMovieList_Keyword_genre.score.notnull()]
-    similarMovieList_Keyword_genre = similarMovieList_Keyword_genre.sort_values(by='score', ascending=False).head(10)
+    similarMovieList_Keyword_genre = similarMovieList_Keyword_genre.sort_values(by = 'score', ascending = False).head(10)
     
     list = similarMovieList_Keyword_genre.values.tolist()
     
@@ -56,18 +59,32 @@ def apiRecommendationByMovie(movieId):
 
 
 # Find similar movies by keywords
-def getSimilarMovieKeywords(movie_id):    
+def getSimilarMovieKeywords(movieIndex, type):    
     # Data Impulation: keywords
     df_keyword = loadKeywords()
-    df_keyword = df_keyword#.head(2000)
+    df_keyword = df_keyword.head(2000)
 
     # Data Impulation: movie_metadata
     df_movie_meta = diMoviesMetadata()
     df_movie_meta = df_movie_meta.merge(df_keyword,on='id')
     df_movie_meta.set_index('id')
+    
+    if type == 'id':
+        movie_id = int(movieIndex)
+        movieTitle = (str((df_movie_meta[df_movie_meta['id'] == movie_id])['title'].values))[2:-2]
+    elif type == 'title':
+        movieTitle = str(movieIndex)
+        temp = df_movie_meta[df_movie_meta['title'].str.contains(movieTitle)]
+        
+        print('--------------------------------')
+        print(temp)
 
-    #movieTitle = (df_movie_meta[df_movie_meta['id'] == movie_id]).iloc[0]['title']
-    movieTitle = (str((df_movie_meta[df_movie_meta['id'] == movie_id])['title'].values))[2:-2]
+        if temp.empty:
+            return df_movie_meta, [], movieTitle
+        
+        movie_id = int(temp.iloc[0]['id'])
+        # Set true movie title in case client inputs missing title
+        movieTitle = (str((df_movie_meta[df_movie_meta['id'] == movie_id])['title'].values))[2:-2] 
 
     # Parse the stringified features into their corresponding python objects
     df_movie_meta['keywords'] = df_movie_meta['keywords'].apply(ast.literal_eval)
@@ -91,17 +108,17 @@ def getSimilarMovieKeywords(movie_id):
 
     pearsonObj = [pearson(np.array(movie_genres_keyword_score.iloc[i, 1:]), movie_item) 
                   for i in range(movie_genres_keyword_score.shape[0])]
-    similarity_value = np.array(pearsonObj)
-   
+    similarity_value = np.array(pearsonObj)   
 
     df_movie_meta["score"] = similarity_value
+
     return df_movie_meta, movie_genres_keyword_score, movieTitle
 
 
 # Data Impulation: movie_metadata
 def diMoviesMetadata():
     df_movie_meta = loadMoviesMetadata()
-    df_movie_meta = df_movie_meta[cols]#.head(2000)    
+    df_movie_meta = df_movie_meta[cols].head(2000)
     df_movie_meta['id'] = df_movie_meta['id'].str.replace('-','')
     df_movie_meta.dropna(subset=["id"], axis = 0 , inplace= True)
     df_movie_meta["id"] = df_movie_meta["id"].astype(str).astype(int)
